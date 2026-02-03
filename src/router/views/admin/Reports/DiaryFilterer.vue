@@ -6,7 +6,7 @@
           :headers="[
             {text: 'SID', value: 'subjectId', align: 'left', width: '135px'},
             {text: 'Date', value: 'metadata.diaryDate', align: 'left', width: '175px'},
-            {text: 'Category', value: 'subjectMetadata.age_category', align: 'left'},
+            {text: 'Category', value: 'subjectMetadata.participant_category', align: 'left'},
             {text: 'Duration', value: 'metadata.duration', align: 'left', width: '125px'},
             {text: 'SID Total', value: 'subjectTotalDuration', align: 'left', width: '155px'},
             {text: '', value: 'actions'},
@@ -195,11 +195,11 @@
                 </td>
               </tr>
             </template>
-            <template v-slot:item.subjectMetadata.age_category="{ item }">
-              {{ (item && item.subjectMetadata && item.subjectMetadata.age_category)
-                ? typeof item.subjectMetadata.age_category === 'object'
-                  ? item.subjectMetadata.age_category.join(', ')
-                  : item.subjectMetadata.age_category
+            <template v-slot:item.subjectMetadata.participant_category="{ item }">
+              {{ (item && item.subjectMetadata && item.subjectMetadata.participant_category)
+                ? typeof item.subjectMetadata.participant_category === 'object'
+                  ? item.subjectMetadata.participant_category.join(', ')
+                  : item.subjectMetadata.participant_category
                 : '' }}
             </template>
             <template v-slot:item.actions="{ item }">
@@ -381,7 +381,7 @@ export default {
           reportLine.metadata.duration,
           reportLine.subjectTotalDuration,
           reportLine.metadata.editingStatus,
-          reportLine.subjectMetadata.age_category,
+          reportLine.subjectMetadata.participant_category,
           `${this.$appStrings('appUrl')}${reportLineLink.href}`,
         ]);
       }
