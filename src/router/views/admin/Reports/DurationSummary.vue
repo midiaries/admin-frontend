@@ -5,6 +5,8 @@
         <v-data-table
           :headers="[
             {text: 'SID', value: 'subjectId', align: 'left'},
+            {text: 'Name', value: 'Name', align: 'left'},
+            {text: 'Email', value: 'email', align: 'left'},
             {text: 'Category', value: 'subjectMetadata.participant_category', align: 'left'},
             {text: '# Diaries', value: 'diaryCount', align: ($vuetify.breakpoint.smAndDown) ? ' d-none' : 'center'},
             {text: 'Total (min)', value: 'diaryLengthTotal', align: 'right'},
