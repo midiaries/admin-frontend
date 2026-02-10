@@ -192,7 +192,7 @@
             <template v-slot:footer.prepend>
               <v-btn
                 small
-                @click.stop="generateDownload({ type: 'xls' })"
+                @click.stop="generateDownload({ type: 'csv' })"
                 :loading="isDownloading"
                 :disabled="isDownloading || fileDownloadBtn.disabled || reportData.length === 0"
                 :color="fileDownloadBtn.color"
