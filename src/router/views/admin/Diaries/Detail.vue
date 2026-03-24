@@ -4,7 +4,7 @@
       <v-col cols="12">
         <v-card>
           <v-card-title primary-title class="msu dark-grey text-center white--text">
-            <h3>Diary Details</h3>
+            <h3>Recording Details</h3>
             <v-spacer></v-spacer>
             <v-dialog v-if="isElevated"
               v-model="showProfileEditor"
@@ -121,7 +121,7 @@
                       <template v-slot="{ clone, save, reset, isDirty }">
                         <v-card>
                           <v-card-title class="msu dark-grey text-center white--text">
-                            <span class="text-h5">Edit Diary</span>
+                            <span class="text-h5">Edit Recording</span>
                             <v-spacer></v-spacer>
                             <v-icon class="white--text">fa-user</v-icon>
                           </v-card-title>
@@ -218,7 +218,7 @@
                   </v-col>
                   <v-col cols="12" class="d-flex justify-end">
                       <v-switch
-                        label="Feature Diary?"
+                        label="Feature Recording?"
                         :input-value="currentDiary.metadata.interesting"
                         @change="toggle('interesting', 'metadata')"
                         :hide-details="true"
@@ -838,7 +838,7 @@ export default {
       editorTitle: '',
       removeDiaryError: false,
       removeDiaryBtn: {
-        text: 'Delete Diary',
+        text: 'Delete Recording',
         color: 'red',
         icon: 'fa-trash',
         disabled: false,
@@ -1076,7 +1076,7 @@ export default {
         })
         .then((ret) => {
           this.$confirm(`
-            Are you extra sure? This will delete the diary and:<br><br>
+            Are you extra sure? This will delete the recording and:<br><br>
             <ul>
               <li><strong>${ret.relatedDocumentCount} files</strong></>
               <li><strong>${ret.relatedTranscriptionCount} transcripts</strong></>
@@ -1085,7 +1085,7 @@ export default {
             from the file system and database.
             `, 
             {
-              title: 'Delete all diary data',
+              title: 'Delete all recording data',
               icon: 'fas fa-question',
               color: 'msu',
               buttonTrueText: 'Yes',
@@ -1102,7 +1102,7 @@ export default {
                   this.$store.dispatch('alert/display',
                     {
                       type: 'success',
-                      message: 'Removed Diary and files!',
+                      message: 'Removed Recording and files!',
                       timeout: 1000,
                       icon: 'fa-thumbs-up',
                     },
@@ -1120,13 +1120,13 @@ export default {
                     },
                     { root: true });
                   setTimeout(() => {
-                    this.removeDiaryBtn.text = 'Delete Diary';
+                    this.removeDiaryBtn.text = 'Delete Recording';
                     this.removeDiaryBtn.disabled = false;
                     Promise.resolve(true);
                   }, 500);
                 });
               } else {
-                this.removeDiaryBtn.text = 'Delete Diary';
+                this.removeDiaryBtn.text = 'Delete Recording';
                 this.removeDiaryBtn.disabled = false;
               }
             });
@@ -1142,7 +1142,7 @@ export default {
             },
             { root: true });
           setTimeout(() => {
-            this.removeDiaryBtn.text = 'Delete Diary';
+            this.removeDiaryBtn.text = 'Delete Recording';
             this.removeDiaryBtn.disabled = false;
             Promise.resolve(true);
           }, 500);
@@ -1490,8 +1490,8 @@ export default {
               // if record not found, display error and route back
               if (err.name) {
                 errMsg = (err.name === 'NotFound')
-                  ? 'No Diary found for this ID!'
-                  : 'There was a problem loading that Diary!';
+                  ? 'No Recording found for this ID!'
+                  : 'There was a problem loading that Recording!';
               }
               this.$store.dispatch('alert/display',
                 {

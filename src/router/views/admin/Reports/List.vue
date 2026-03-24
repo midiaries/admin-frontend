@@ -27,8 +27,8 @@
                   <v-icon color="msu">fa-filter</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title>Diary Filterer</v-list-item-title>
-                  <v-list-item-subtitle>Filter Diaries through said filter to retrieve filtered Diary list</v-list-item-subtitle>
+                  <v-list-item-title>Recording Filterer</v-list-item-title>
+                  <v-list-item-subtitle>Filter Recordings through said filter to retrieve filtered Recording list</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>
@@ -66,8 +66,8 @@
                   <v-icon v-if="downloadStatus['allDiaries'] === 'error'" color="red">fa-ban</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title>Diary List</v-list-item-title>
-                  <v-list-item-subtitle>Download CSV of all Diaries</v-list-item-subtitle>
+                  <v-list-item-title>Recording List</v-list-item-title>
+                  <v-list-item-subtitle>Download CSV of all Recordings</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>

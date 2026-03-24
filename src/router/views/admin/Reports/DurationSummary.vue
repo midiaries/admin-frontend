@@ -8,7 +8,7 @@
             {text: 'Name', value: 'Name', align: 'left'},
             {text: 'Email', value: 'email', align: 'left'},
             {text: 'Category', value: 'subjectMetadata.participant_category', align: 'left'},
-            {text: '# Diaries', value: 'diaryCount', align: ($vuetify.breakpoint.smAndDown) ? ' d-none' : 'center'},
+            {text: '# Recordings', value: 'diaryCount', align: ($vuetify.breakpoint.smAndDown) ? ' d-none' : 'center'},
             {text: 'Total (min)', value: 'diaryLengthTotal', align: 'right'},
             {text: 'Qualifies?', value: 'shouldBePaid', align: 'center', sortable: false},
             {text: 'Opt?', value: 'subjectMetadata.payment_optout', align: ($vuetify.breakpoint.smAndDown) ? ' d-none' : 'center'},
@@ -31,7 +31,7 @@
               <span>
                 <v-toolbar flat class="msu dark-grey text-center white--text">
                   <v-toolbar-title>
-                    <h3>Report: Diary Durations</h3>
+                    <h3>Report: Recording Durations</h3>
                   </v-toolbar-title>
                   <v-text-field
                     v-model="localSearch"
@@ -107,10 +107,10 @@
               </v-icon>
             </template>
             <template v-slot:no-data v-if="!selectedDiaryPayPeriodId">
-               Please choose a Pay Period above to get started
+               Please choose a Recording Period above to get started
             </template>
             <template v-slot:no-data v-else>
-               No Diaries for this range
+               No Recordings for this range
             </template>
         </v-data-table>
       </v-col>
@@ -133,11 +133,11 @@ export default {
   name: 'duration-summaries',
   page() {
     return {
-      title: `Diary Times | Reports | ${this.$appStrings('appName')}`,
+      title: `Recording Times | Reports | ${this.$appStrings('appName')}`,
       meta: [
         {
           name: 'description',
-          content: 'Reports - Diary Duration Summaries',
+          content: 'Reports - Recording Duration Summaries',
         },
       ],
     };

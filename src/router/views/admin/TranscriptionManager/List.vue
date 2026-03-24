@@ -140,7 +140,7 @@
               </span>
             </template>
             <template v-slot:item.dateCode="{ item }">
-              {{ item.diaryMetadata ? `${item.diaryMetadata.diaryDate} #${item.diaryMetadata.sequence} T${item.revision}` : 'NO DIARY?' }}
+              {{ item.diaryMetadata ? `${item.diaryMetadata.diaryDate} #${item.diaryMetadata.sequence} T${item.revision}` : 'NO RECORDING?' }}
             </template>
             <template v-slot:item.status="{ item }">
               <span v-if="item.status === 99">
@@ -203,7 +203,7 @@
                 x-small
                 color="msu white--text"
                 @click="showDiaryDetail(item)">
-                Diary
+                Recording
               </v-btn>
             </template>
             <template v-slot:footer.prepend v-if="hasRole('admin, transcriptManager')">

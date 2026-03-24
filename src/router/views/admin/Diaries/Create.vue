@@ -5,7 +5,7 @@
         <v-card>
           <v-toolbar flat class="msu dark-grey white--text">
             <v-toolbar-title>
-              <h3>Manually Add Diary</h3>
+              <h3>Manually Add Recording</h3>
               <h6>(unlinked from Participant-created Profiles)</h6>
             </v-toolbar-title>
           </v-toolbar>
@@ -101,7 +101,7 @@
                 </v-card>
                 <v-card>
                   <v-card-title class="msu text-center white--text">
-                    <span class="text-h5">Add Diary</span>
+                    <span class="text-h5">Add Recording</span>
                     <v-spacer></v-spacer>
                     <v-icon class="white--text">fa-book</v-icon>
                   </v-card-title>
@@ -119,7 +119,7 @@
                   <span justify="center" align="center" class="available-diaries" slot-scope="{ items: diaries, isFindPending: diariesAreLoading }">
                     <v-data-table
                       :headers="[
-                        {text: 'Diary #', value: 'dateCode', width: '40%'},
+                        {text: 'Recording #', value: 'dateCode', width: '40%'},
                         {text: 'Duration', value: 'duration', width: '20%', align: ($vuetify.breakpoint.smAndDown) ? ' d-none' : ''},
                         {text: 'Added', value: 'createdAt', align: ($vuetify.breakpoint.mdAndDown) ? ' d-none' : 'end'},
                       ]"
@@ -136,7 +136,7 @@
                         <template v-slot:top>
                           <v-toolbar flat class="msu text-center white--text">
                             <v-toolbar-title class="text-h5">
-                              Existing Diaries
+                              Existing Recordings
                             </v-toolbar-title>
                             <v-spacer></v-spacer>
                             <v-icon class="white--text">fa-book-open</v-icon>
@@ -149,7 +149,7 @@
                           {{ item.createdAt | moment('MMMM Do, YYYY, h:mm A') }}
                         </template>
                         <template v-slot:no-data>
-                           No diaries to show yet
+                           No recordings to show yet
                         </template>
                     </v-data-table>
                   </span>

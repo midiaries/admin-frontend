@@ -56,7 +56,7 @@
               {text: 'Pub', value: 'permissionShare', width: '10%', align: 'center', sortable: false},
               {text: 'Feat', value: 'metadata.interesting', width: '10%', align: 'center', sortable: false},
               {text: 'Category', value: 'participantCategory', width: '10%', sortable: false},
-              {text: 'Diary #', value: 'dateCode', width: '25%', align: 'end', sortable: false},
+              {text: 'Recording #', value: 'dateCode', width: '25%', align: 'end', sortable: false},
               {text: 'Duration', value: 'metadata.duration', width: '10%', align: 'start', sortable: false},
               {text: '', value: 'actions', width: '10%', sortable: false},
               {text: '', value: 'hidden', width: '5%', align: ($vuetify.breakpoint.smAndDown || !showHiddenDiaries) ? ' d-none' : '', sortable: false},
@@ -72,7 +72,7 @@
             }"
             :fixed-header="true"
             :loading="isProcessing"
-            loading-text="Loading Diaries..."
+            loading-text="Loading Recordings..."
             height="70vh"
             class="elevation-1">
             <template v-slot:progress>
@@ -81,7 +81,7 @@
             <template v-slot:top>
               <v-toolbar flat class="msu dark-grey text-center white--text">
                 <v-toolbar-title>
-                  <h3>Recent Diaries</h3>
+                  <h3>Recent Recordings</h3>
                 </v-toolbar-title>
                 <v-text-field
                   v-model="searchString"
@@ -214,11 +214,11 @@ import formatters from '@/mixins/formatters';
 export default {
   page() {
     return {
-      title: `Admin | Diaries | ${this.$appStrings('appName')}`,
+      title: `Admin | Recordings | ${this.$appStrings('appName')}`,
       meta: [
         {
           name: 'description',
-          content: 'Admin - Diary List',
+          content: 'Admin - Recording List',
         },
       ],
     };

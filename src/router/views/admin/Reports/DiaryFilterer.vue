@@ -86,7 +86,7 @@
                           </v-col> -->
                           <v-col cols="12" sm="4">
                             <v-switch
-                              label="Only return Completed diaries?"
+                              label="Only return Completed recordings?"
                               v-model="completedOnly"
                               @change="getReportData()"
                               :hide-details="true"
@@ -257,11 +257,11 @@ export default {
   name: 'diary-filter-feeder',
   page() {
     return {
-      title: `Diary Filterer | Reports | ${this.$appStrings('appName')}`,
+      title: `Recording Filterer | Reports | ${this.$appStrings('appName')}`,
       meta: [
         {
           name: 'description',
-          content: 'Reports - Diary Filterer',
+          content: 'Reports - Recording Filterer',
         },
       ],
     };
