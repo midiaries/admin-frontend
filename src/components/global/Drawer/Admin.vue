@@ -22,12 +22,12 @@ export default {
     items() {
       return [
         {
-          text: 'Quick Add: Diary',
+          text: 'Quick Add: Recording',
           icon: 'fa-plus-circle',
           route: 'adminDiaryUpload',
         },
         {
-          text: 'Diaries',
+          text: 'Recordings',
           icon: 'fa-book',
           route: 'adminDiariesList',
         },
@@ -93,7 +93,7 @@ export default {
               route: 'adminPaymentGroupsList',
             },
             {
-              text: 'Payment Periods',
+              text: 'Recording Periods',
               icon: 'far fa-calendar-alt',
               route: 'adminDiaryPayPeriodsList',
             },

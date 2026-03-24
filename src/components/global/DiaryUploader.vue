@@ -15,12 +15,12 @@
             <template v-slot:activator="{ on }">
               <ValidationProvider
                 :ref="selectedDate"
-                name="Diary Date"
+                name="Recording Date"
                 rules="required|date_format:YYYY-MM-DD"
                 v-slot="{ errors }">
                 <v-text-field
                   v-model="selectedDate"
-                  label="Diary Date"
+                  label="Recording Date"
                   :error-messages="errors"
                   clearable
                   prepend-icon="fa-calendar"

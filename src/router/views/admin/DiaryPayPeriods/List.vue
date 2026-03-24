@@ -31,7 +31,7 @@
             <ValidationObserver ref="editorObserver" v-slot="{ invalid, validate }">
               <v-toolbar flat class="msu dark-grey text-center white--text">
                 <v-toolbar-title>
-                  <h3>Diary Pay Periods</h3>
+                  <h3>Recording Periods</h3>
                 </v-toolbar-title>
                 <v-text-field
                   v-model="localSearch"
@@ -78,7 +78,7 @@
                 </v-dialog>
                 <v-spacer></v-spacer>
                 <v-btn v-if="hasRole('admin, ra, ga') && $vuetify.breakpoint.mdAndUp" type="button" class="add-row mr-5" @click="addObj">
-                  Add Pay Period
+                  Add Recording Period
                 </v-btn>
                 <v-icon class="white--text">
                   {{ showHiddenDiaryPayPeriodsIcon }}
@@ -112,7 +112,7 @@
           <template v-slot:footer v-if="hasRole('admin, ra, ga') && $vuetify.breakpoint.smAndDown">
             <v-col cols="12" class="text-center">
               <v-btn type="button" small class="add-row" @click="addObj">
-                Add Pay Period
+                Add Recording Period
               </v-btn>
             </v-col>
           </template>
@@ -133,7 +133,7 @@
             </FeathersVuexFormWrapper>
           </template>
           <template v-slot:no-data>
-             No active Diary Pay Periods to show yet
+             No active Recording Periods to show yet
           </template>
         </v-data-table>
       </v-col>
@@ -154,11 +154,11 @@ export default {
   ],
   page() {
     return {
-      title: `Diary Pay Periods | Admin | ${this.$appStrings('appName')}`,
+      title: `Recording Periods | Admin | ${this.$appStrings('appName')}`,
       meta: [
         {
           name: 'description',
-          content: 'Admin - Diary Pay Periods List',
+          content: 'Admin - Recording Periods List',
         },
       ],
     };
@@ -195,25 +195,25 @@ export default {
   },
   methods: {
     addObj() {
-      this.editorTitle = 'Add a Pay Period';
+      this.editorTitle = 'Add a Recording Period';
       this.editedObj = new this.$FeathersVuex.api.DiaryPayPeriod();
       this.showEditor = true;
     },
     editObj(obj) {
-      this.editorTitle = 'Edit Pay Period';
+      this.editorTitle = 'Edit Recording Period';
       this.editedObj = obj;
       this.showEditor = true;
     },
     clearObjDialog() {
       this.showEditor = false;
-      this.editorTitle = 'Add a Pay Period';
+      this.editorTitle = 'Add a Recording Period';
       this.editedObj = new this.$FeathersVuex.api.DiaryPayPeriod();
       this.$refs.editorObserver.reset();
     },
     removeObj(obj) {
-      this.$confirm('Are you sure you want to delete this Pay Period?', 
+      this.$confirm('Are you sure you want to delete this Recording Period?', 
         {
-          title: 'Delete Pay Period',
+          title: 'Delete Recording Period',
           icon: 'fas fa-question',
           color: 'msu',
           buttonTrueText: 'Yes',

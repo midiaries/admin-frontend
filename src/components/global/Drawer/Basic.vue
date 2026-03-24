@@ -22,12 +22,12 @@ export default {
     items() {
       return [
         {
-          text: 'Quick Add: Diary',
+          text: 'Quick Add: Recording',
           icon: 'fa-plus-circle',
           route: 'basicDiaryUpload',
         },
         {
-          text: 'Diaries',
+          text: 'Recordings',
           icon: 'fa-book',
           route: 'basicDiariesList',
         },

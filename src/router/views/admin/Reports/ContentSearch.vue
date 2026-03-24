@@ -87,7 +87,7 @@
                           </v-col>
                           <v-col cols="12" sm="6">
                             <v-switch
-                              label="Only return Completed diaries?"
+                              label="Only return Completed recordings?"
                               v-model="completedOnly"
                               @change="(searchString && searchString.length >= 3) ? getReportData(searchString) : null"
                               :hide-details="true"

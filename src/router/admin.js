@@ -49,7 +49,7 @@ export default [
             },
           },
           {
-            path: 'payPeriods',
+            path: 'recordingPeriods',
             name: 'adminDiaryPayPeriodsList',
             component: () => import(/* webpackChunkName: "adminDiaryPayPeriodsList" */ '@/router/views/admin/DiaryPayPeriods/List.vue'),
           },
@@ -125,7 +125,7 @@ export default [
         ],
       },
       {
-        path: 'diaries',
+        path: 'recordings',
         component: LayoutBlank,
         children: [
           {
@@ -201,7 +201,7 @@ export default [
             props: true,
           },
           {
-            path: 'diary-filterer',
+            path: 'recording-filterer',
             name: 'adminReportsDiaryFilterer',
             component: () => import(/* webpackChunkName: "adminReportsDiaryFilterer" */ '@/router/views/admin/Reports/DiaryFilterer.vue'),
             props: true,
@@ -238,7 +238,7 @@ export default [
         meta: { sidebar: { visible: true } },
       },
       {
-        path: 'diaries',
+        path: 'recordings',
         component: LayoutBlank,
         name: 'basicDiaries',
         children: [
