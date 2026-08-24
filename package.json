@@ -1,7 +1,7 @@
 {
   "name": "mi-diaries-research-framework-frontend",
   "description": "MI Diaries Research Framework - Frontend",
-  "version": "1.1.30",
+  "version": "1.2.0",
   "private": true,
   "license": "see LICENSE file",
   "scripts": {

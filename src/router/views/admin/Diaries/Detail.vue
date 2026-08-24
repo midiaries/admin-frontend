@@ -346,6 +346,13 @@
                   @change="importNewTranscript(recording[0].id)"
                   :key="`${currentDiary.id}-${fileInputKey}`"
                 >
+                <ElanTierMapper
+                  v-model="showTierMapper"
+                  :file="elanImportFile"
+                  :audioDuration="currentDiary.metadata.duration || 0"
+                  @confirm="confirmElanImport"
+                  @cancel="cancelElanImport">
+                </ElanTierMapper>
                 <span v-if="isElevated">
                 <v-btn v-if="recording.length" class="white black--text" :small="$vuetify.breakpoint.smAndDown" @click.stop="requestNewTranscript(recording[0].id)" :loading="transcriptIsRunning">
                   <v-icon small class="mr-2">fa-cloud-download-alt</v-icon>
@@ -851,6 +858,9 @@ export default {
       uploadProgress: 0,
       uploadProgressColor: 'msu accent-orange',
       fileInputKey: 0,
+      elanImportFile: null,
+      elanImportDocId: null,
+      showTierMapper: false,
       fileUploadBtn: {
         text: 'Import a transcript',
         color: 'white',
@@ -1204,51 +1214,84 @@ export default {
       }
     },
     importNewTranscript(documentId) {
-      let importedFile = null;
-      if (documentId) {
-        importedFile = this.$refs.fileInput.files[0];
-        if (importedFile) {
-          let formData = new FormData();
-          formData.append("files[]", importedFile);
-          formData.append("secretKey", this.$appStrings('formSecret'));
-          formData.append('parentId', this.currentDiary.id);
-          formData.append('audioDocumentId', documentId);
-          this.isUploading = true;
-          axios.post('/api/documents', formData, {
-            headers: {
-              Authorization: this.$store.state.auth.accessToken,
-              'Content-Type': 'multipart/form-data',
-            },
-            onUploadProgress: function(progressEvent) {
-              this.uploadProgress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            }.bind(this),
-          })
-          .then((resp) => {
-            this.isCompleted = true;
-            this.fileUploadBtn.text = '';
-            this.fileUploadBtn.icon = 'fa-check-circle';
-            this.uploadResponse = resp;
-            this.uploadProgressColor = 'msu success-1';
-            this.transcriptPanelsExpanded = [];
-          })
-          .catch((err) => {
-            this.uploadResponse = err;
-            this.fileUploadBtn.text = '';
-            this.fileUploadBtn.icon = 'fa-exclamation-circle';
-          })
-          .finally(() => {
-            this.isUploading = false;
-            setTimeout(() => {
-              this.fileUploadBtn.text = 'Import a transcript';
-              this.fileUploadBtn.icon = 'fa-file-alt';
-              this.uploadProgress = 0;
-              this.uploadProgressColor = 'msu accent-orange';
-              this.fileInputKey += 1;
-              Promise.resolve(true);
-            }, 1500);
-          });
-        }
+      const importedFile = this.$refs.fileInput.files[0];
+      if (!documentId || !importedFile) {
+        return;
       }
+      const ext = importedFile.name.split('.').pop().toLowerCase();
+      if (ext === 'eaf') {
+        this.elanImportFile = importedFile;
+        this.elanImportDocId = documentId;
+        this.showTierMapper = true;
+        return;
+      }
+      this.postTranscript(documentId, importedFile, null);
+    },
+    confirmElanImport({ tierMap }) {
+      const documentId = this.elanImportDocId;
+      const importedFile = this.elanImportFile;
+      this.elanImportFile = null;
+      this.elanImportDocId = null;
+      if (documentId && importedFile && tierMap && tierMap.length) {
+        this.postTranscript(documentId, importedFile, tierMap);
+      }
+    },
+    cancelElanImport() {
+      this.elanImportFile = null;
+      this.elanImportDocId = null;
+      this.fileInputKey += 1;
+      this.$store.dispatch('alert/display',
+        {
+          type: 'error',
+          message: 'Transcription upload canceled',
+          timeout: 2500,
+          icon: 'fa-ban',
+        },
+        { root: true });
+    },
+    postTranscript(documentId, importedFile, tierMap) {
+      let formData = new FormData();
+      formData.append("files[]", importedFile);
+      formData.append("secretKey", this.$appStrings('formSecret'));
+      formData.append('parentId', this.currentDiary.id);
+      formData.append('audioDocumentId', documentId);
+      if (tierMap) {
+        formData.append('tierMap', JSON.stringify(tierMap));
+      }
+      this.isUploading = true;
+      axios.post('/api/documents', formData, {
+        headers: {
+          Authorization: this.$store.state.auth.accessToken,
+          'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: function(progressEvent) {
+          this.uploadProgress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        }.bind(this),
+      })
+      .then((resp) => {
+        this.isCompleted = true;
+        this.fileUploadBtn.text = '';
+        this.fileUploadBtn.icon = 'fa-check-circle';
+        this.uploadResponse = resp;
+        this.uploadProgressColor = 'msu success-1';
+        this.transcriptPanelsExpanded = [];
+      })
+      .catch((err) => {
+        this.uploadResponse = err;
+        this.fileUploadBtn.text = '';
+        this.fileUploadBtn.icon = 'fa-exclamation-circle';
+      })
+      .finally(() => {
+        this.isUploading = false;
+        setTimeout(() => {
+          this.fileUploadBtn.text = 'Import a transcript';
+          this.fileUploadBtn.icon = 'fa-file-alt';
+          this.uploadProgress = 0;
+          this.uploadProgressColor = 'msu accent-orange';
+          this.fileInputKey += 1;
+          Promise.resolve(true);
+        }, 1500);
+      });
     },
     convertAudio({id, type, raw = false, redact = false, transcriptionId = null}) {
       const options = {};
